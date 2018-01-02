@@ -3,6 +3,7 @@
 # purpose：分析拉钩上跟数据挖掘，数据分析等相近的岗位要求，全国的
 # 1、使用request 直接获得json数据
 # 2、或者使用Beautiful来拿到数据。
+# 返回动态数据使用json来那，而静态网页结构，使用beautiful来那。
 
 import json
 

@@ -1,6 +1,6 @@
 # -*-coding:utf-8-*-
 # -*- author:wolfog-*-
-# purpose:使用爬取到的数据
+# purpose:使用爬取到的数据;只是为了拿到某一个项目，打印出来，没实际用处；
 
 import pymongo
 

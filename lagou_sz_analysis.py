@@ -1,16 +1,15 @@
 # -*-coding:utf-8-*-
 # -*- author:wolfog-*-
-# purpose：分析拉钩上跟数据挖掘，数据分析等相近的岗位要求，全国的
+# purpose：分析拉钩上跟数据挖掘，数据分析，深度学习等相近的岗位要求，深圳地区
 # 1、使用request 直接获得json数据
-# 2、或者使用Beautiful来拿到数据。
-# 返回动态数据使用json来那，而静态网页结构，使用beautiful来那。
+# 返回动态数据使用json来拿，而静态网页结构，使用beautiful来拿到。
 
 import json
-
-import requests
 import pymongo
+import requests
 
-keyword = ['数据分析', '数据挖掘', '数据分析实习', '数据实习', '数据运营', '数据分析助理', '数据挖掘实习']
+# keyword = ['数据分析', '数据挖掘', '数据分析实习', '数据实习', '数据运营', '数据分析助理', '数据挖掘实习']
+keyword = ['深度学习', '算法', '自然语言处理', '机器学习实习', '计算机视觉', '人工智能', '大数据']
 
 
 def getCountryData(i, j):
@@ -53,14 +52,24 @@ def getCountryData(i, j):
             'workYear': list['workYear'],
             'district': list['district'],
             'positionId': list['positionId'],
-            ' createTime': list['createTime'],
+            'createTime': list['createTime'],
         }
         client['lagouDb']['data_sz_colls' + keyword[j]].insert_one(data)
+    return json_dict['content']['positionResult']['totalCount']
 
 
 if __name__ == '__main__':
     client = pymongo.MongoClient('localhost', 27017)
-    for j in range(0, 7):
+    for j in range(0, keyword.__len__()):
         for i in range(1, 31):  # 深圳只有336个岗位
-            print("%s的第%d页" % (keyword[j], i))
-            getCountryData(i, j)
+            if (i == 1):
+                print("%s的第%d页" % (keyword[j], i))
+                totalCount = getCountryData(i, j)
+            elif (i * 15 < totalCount):
+                print("%s的第%d页" % (keyword[j], i))
+                totalCount = getCountryData(i, j)
+            elif (i * 15 >= totalCount and (i - 1) * 15 <= totalCount):
+                print("%s的第%d页" % (keyword[j], i))
+                totalCount = getCountryData(i, j)
+            else:
+                break

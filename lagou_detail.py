@@ -1,6 +1,6 @@
 # -*-coding:utf-8-*-
 # -*- author:wolfog-*-
-# purpose:获取数据的具体要求，现在差不多了，在研究研究那个reffer怎们做动态
+# purpose:从数据库中拿出职位的id，然后请求具体数据根据Beautiful拿到具体的职位要求
 
 import requests
 from bs4 import BeautifulSoup
@@ -37,8 +37,8 @@ def getDetail(positionID, postfix):
 
 client = pymongo.MongoClient('localhost', 27017)
 # result = client.lagouDb.data_sz_colls数据分析.find().limit(3)推荐使用下面的写法，比较灵活
-# postfixList = ['数据分析', '数据挖掘', '数据分析实习', '数据实习', '数据运营', '数据分析助理', '数据挖掘实习']
-postfixList = ['数据实习']
+# postfixList = ['数据分析', '数据挖掘', '数据分析实习', '数据实习', '数据运营', '数据分析助理', '数据挖掘实习','数据实习']
+postfixList = ['深度学习', '算法', '自然语言处理', '机器学习实习', '计算机视觉', '人工智能', '大数据']
 # 到数据实习了
 for postfix in postfixList:
     print("=" * 90 + postfix + "=" * 90)
